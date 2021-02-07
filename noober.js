@@ -1,42 +1,47 @@
 function levelOfService(ride) {
-  let levelOfService
+  let levelOfService;
   if (ride.length > 1) {
-    levelOfService = 'Noober Pool'
+    levelOfService = "Noober Pool";
   } else if (ride[0].purpleRequested) {
-    levelOfService = 'Noober Purple'
+    levelOfService = "Noober Purple";
   } else if (ride[0].numberOfPassengers > 3) {
-    levelOfService = 'Noober XL'
+    levelOfService = "Noober XL";
   } else {
-    levelOfService = 'Noober X'
+    levelOfService = "Noober X";
   }
-  return levelOfService
+  return levelOfService;
 }
 
 function renderRides(ridesArray) {
   for (let i = 0; i < ridesArray.length; i++) {
-    let ride = ridesArray[i]
+    let ride = ridesArray[i];
 
-    document.querySelector('.rides').insertAdjacentHTML('beforeend', `
+    document.querySelector(".rides").insertAdjacentHTML(
+      "beforeend",
+      `
       <h1 class="inline-block mt-8 px-4 py-2 rounded-xl text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
         <i class="fas fa-car-side"></i>
         <span>${levelOfService(ride)}</span>
       </h1>
-    `)
+    `
+    );
 
-    let borderClass
-    let backgroundClass
-    if (levelOfService(ride) == 'Noober Purple') {
-      borderClass = 'border-purple-500'
-      backgroundClass = 'bg-purple-600'
+    let borderClass;
+    let backgroundClass;
+    if (levelOfService(ride) == "Noober Purple") {
+      borderClass = "border-purple-500";
+      backgroundClass = "bg-purple-600";
     } else {
-      borderClass = 'border-gray-900'
-      backgroundClass = 'bg-gray-600'
+      borderClass = "border-gray-900";
+      backgroundClass = "bg-gray-600";
     }
 
     for (let i = 0; i < ride.length; i++) {
-      let leg = ride[i]
+      let leg = ride[i];
 
-      document.querySelector('.rides').insertAdjacentHTML('beforeend', `
+      document.querySelector(".rides").insertAdjacentHTML(
+        "beforeend",
+        `
         <div class="border-4 ${borderClass} p-4 my-4 text-left">
           <div class="flex">
             <div class="w-1/2">
@@ -62,12 +67,23 @@ function renderRides(ridesArray) {
             </div>
           </div>
         </div>
-      `)
+      `
+      );
     }
   }
 }
 
-window.addEventListener('DOMContentLoaded', function() {
-  // YOUR CODE
-})
+// CODE HERE
+async function pageLoaded() {
+  let response = await fetch("https://kiei451.com/api/rides.json");
+  let json = await response.json();
+  console.log(json);
 
+  window.addEventListener("DOMContentLoaded", function () {
+    let nooberPoolButton = document.querySelector("#noober-pool-filter");
+    nooberPoolButton.addEventListener("click", async function (event) {
+      event.preventDefault();
+      console.log("Noober Pool button has been clicked");
+    });
+  });
+}
