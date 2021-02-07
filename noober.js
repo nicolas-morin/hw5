@@ -74,16 +74,81 @@ function renderRides(ridesArray) {
 }
 
 // CODE HERE
-async function pageLoaded() {
-  let response = await fetch("https://kiei451.com/api/rides.json");
-  let json = await response.json();
-  console.log(json);
+async function pageLoaded() {}
 
-  window.addEventListener("DOMContentLoaded", function () {
-    let nooberPoolButton = document.querySelector("#noober-pool-filter");
-    nooberPoolButton.addEventListener("click", async function (event) {
-      event.preventDefault();
-      console.log("Noober Pool button has been clicked");
-    });
+window.addEventListener("DOMContentLoaded", function () {
+  // async function SYNCjson() {
+  //   let response = await fetch("https://kiei451.com/api/rides.json");
+  //   let json = await response.json();
+  //   console.log(json);
+  // }
+
+  let nooberPurpleButton = document.querySelector("#noober-purple-filter");
+  nooberPurpleButton.addEventListener("click", async function (event) {
+    event.preventDefault();
+    console.log("Noober Purple button has been clicked");
+    let response = await fetch("https://kiei451.com/api/rides.json");
+    let json = await response.json();
+    console.log(json);
+    Element.innerHTLML = "";
+    let newArray = [];
+    for (let j = 0; j < json.length; j++) {
+      let service = levelOfService(json[j]);
+      if (service == "Noober Purple") {
+        newArray.push(json[j]);
+      }
+      renderRides(newArray);
+    }
   });
-}
+
+  let nooberXLButton = document.querySelector("#noober-xl-filter");
+  nooberXLButton.addEventListener("click", async function (event) {
+    event.preventDefault();
+    console.log("Noober XL button has been clicked");
+    let response = await fetch("https://kiei451.com/api/rides.json");
+    let json = await response.json();
+    console.log(json);
+    let newArray = [];
+    for (let j = 0; j < json.length; j++) {
+      let service = levelOfService(json[j]);
+      if (service == "Noober XL") {
+        newArray.push(json[j]);
+      }
+      renderRides(newArray);
+    }
+  });
+
+  let nooberXButton = document.querySelector("#noober-x-filter");
+  nooberXButton.addEventListener("click", async function (event) {
+    event.preventDefault();
+    console.log("Noober X button has been clicked");
+    let response = await fetch("https://kiei451.com/api/rides.json");
+    let json = await response.json();
+    console.log(json);
+    let newArray = [];
+    for (let j = 0; j < json.length; j++) {
+      let service = levelOfService(json[j]);
+      if (service == "Noober X") {
+        newArray.push(json[j]);
+      }
+      renderRides(newArray);
+    }
+  });
+
+  let nooberPoolButton = document.querySelector("#noober-pool-filter");
+  nooberPoolButton.addEventListener("click", async function (event) {
+    event.preventDefault();
+    console.log("Noober Pool button has been clicked");
+    let response = await fetch("https://kiei451.com/api/rides.json");
+    let json = await response.json();
+    console.log(json);
+    let newArray = [];
+    for (let j = 0; j < json.length; j++) {
+      let service = levelOfService(json[j]);
+      if (service == "Noober Pool") {
+        newArray.push(json[j]);
+      }
+      renderRides(newArray);
+    }
+  });
+});
