@@ -2,10 +2,10 @@ function levelOfService(ride) {
   let levelOfService;
   if (ride.length > 1) {
     levelOfService = "Noober Pool";
-  } else if (ride[0].numberOfPassengers > 3) {
-    levelOfService = "Noober XL";
   } else if (ride[0].purpleRequested) {
     levelOfService = "Noober Purple";
+  } else if (ride[0].numberOfPassengers > 3) {
+    levelOfService = "Noober XL";
   } else {
     levelOfService = "Noober X";
   }
@@ -78,9 +78,9 @@ window.addEventListener("DOMContentLoaded", function () {
   async function SYNCjson(serviceKey) {
     let response = await fetch("https://kiei451.com/api/rides.json");
     let json = await response.json();
-    console.log(json);
+    //console.log(json);
+    document.querySelector(".rides").innerHTML = "";
     let newArray = [];
-    Element.innerHTLML = "";
     for (let j = 0; j < json.length; j++) {
       let service = levelOfService(json[j]);
       if (service == serviceKey || serviceKey == "All") {
@@ -98,7 +98,7 @@ window.addEventListener("DOMContentLoaded", function () {
   });
 
   let nooberXLButton = document.querySelector("#noober-xl-filter");
-  nooberXLButton.addEventListener("click", async function (event) {
+  nooberXLButton.addEventListener("click", function (event) {
     event.preventDefault();
     console.log("Noober XL button has been clicked");
     SYNCjson("Noober XL");
@@ -121,7 +121,7 @@ window.addEventListener("DOMContentLoaded", function () {
   let nooberAllButton = document.querySelector("#all-filter");
   nooberAllButton.addEventListener("click", async function (event) {
     event.preventDefault();
-    console.log("Noober All button has been clicked");
+    console.log("Noober Pool button has been clicked");
     SYNCjson("All");
   });
 });
