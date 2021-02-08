@@ -2,10 +2,10 @@ function levelOfService(ride) {
   let levelOfService;
   if (ride.length > 1) {
     levelOfService = "Noober Pool";
-  } else if (ride[0].purpleRequested) {
-    levelOfService = "Noober Purple";
   } else if (ride[0].numberOfPassengers > 3) {
     levelOfService = "Noober XL";
+  } else if (ride[0].purpleRequested) {
+    levelOfService = "Noober Purple";
   } else {
     levelOfService = "Noober X";
   }
